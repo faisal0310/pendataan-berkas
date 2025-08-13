@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daftar Berkas - Admin Panel</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <div class="sidebar">
+            <div class="logo">
+                <h3>Admin Panel</h3>
+            </div>
+            <ul class="nav-links">
+                <li>
+                    <a href="index.html">
+                        <span>Tambah Data</span>
+                    </a>
+                </li>
+                <li class="active">
+                    <a href="list.html">
+                        <span>Daftar Berkas</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" id="logout-btn">
+                        <span>Logout</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="main-content">
+            <header class="main-header">
+                <h2>Daftar Berkas</h2>
+            </header>
+            <div class="content-wrapper">
+                <div class="card">
+                    <h3>Daftar Berkas</h3>
+                    <div class="filter-buttons">
+                        <button id="filter-daily-btn" class="active">Harian</button>
+                        <button id="filter-weekly-btn">Mingguan</button>
+                        <button id="filter-monthly-btn">Bulanan</button>
+                        <button id="filter-all-btn">Semua Data</button>
+                    </div>
+                    <div class="table-responsive">
+                        <table id="file-table">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Nama</th>
+                                    <th>Kategori</th>
+                                    <th>Kantor Cabang</th>
+                                    <th>Waktu Masuk</th>
+                                    <th>Kelengkapan</th>
+                                    <th>Tidak Lengkap</th>
+                                    <th>Status</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                    <div class="export-buttons">
+                        <button id="export-excel-btn">Ekspor ke Excel</button>
+                        <button id="export-pdf-btn">Ekspor ke PDF</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

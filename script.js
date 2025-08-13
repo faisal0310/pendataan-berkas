@@ -3,11 +3,32 @@ document.addEventListener('DOMContentLoaded', () => {
     const isLoggedIn = localStorage.getItem('isLoggedIn');
     const path = window.location.pathname;
 
-    if (path.endsWith('index.html') && !isLoggedIn) {
-        window.location.href = 'login.html';
-        return;
+    // Logika untuk halaman login
+    const loginForm = document.getElementById('login-form');
+    if (loginForm) {
+        if (isLoggedIn) {
+            window.location.href = 'index.html'; // Jika sudah login, langsung ke dashboard
+            return;
+        }
+
+        loginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            // Kredensial hardcoded untuk login
+            if (username === 'admin' && password === 'admin123') {
+                localStorage.setItem('isLoggedIn', 'true');
+                window.location.href = 'index.html';
+            } else {
+                alert('Username atau password salah. Silakan coba lagi.');
+            }
+        });
+        return; // Hentikan eksekusi skrip lain di halaman login
     }
-    if (path.endsWith('list.html') && !isLoggedIn) {
+
+    // Logika untuk halaman dashboard (index.html dan list.html)
+    if (!isLoggedIn) {
         window.location.href = 'login.html';
         return;
     }
@@ -221,19 +242,4 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         exportPdfBtn.addEventListener('click', () => {
-            const { jsPDF } = window.jspdf;
-            const doc = new jsPDF('p', 'pt', 'a4');
-            const table = document.getElementById('file-table');
-            
-            html2canvas(table).then(canvas => {
-                const imgData = canvas.toDataURL('image/png');
-                const imgWidth = doc.internal.pageSize.getWidth() - 40;
-                const imgHeight = (canvas.height * imgWidth) / canvas.width;
-                
-                doc.text("Daftar Berkas", 40, 30);
-                doc.addImage(imgData, 'PNG', 20, 50, imgWidth, imgHeight);
-                doc.save("Data_Berkas.pdf");
-            });
-        });
-    }
-});
+            const { jsPDF } = window.

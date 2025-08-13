@@ -217,27 +217,36 @@ button:hover {
     background-color: var(--card-bg);
 }
 
+/* Membuat tabel memenuhi lebar container */
+.table-responsive {
+    width: 100%;
+    overflow-x: auto;
+    margin-bottom: 20px;
+    box-shadow: var(--shadow-sm);
+    border-radius: 8px;
+    background-color: var(--card-bg);
+}
+
 table {
     width: 100%;
     border-collapse: collapse;
-    min-width: 800px;
     background-color: var(--card-bg);
     border-radius: 8px;
     overflow: hidden;
 }
 
-/* Semua teks tabel tetap horizontal */
+/* Pastikan semua teks horizontal */
 th, td {
     padding: 12px 10px;
-    white-space: normal !important; /* biar kata utuh tidak pecah */
-    word-break: normal !important;  /* hindari pecah per huruf */
+    white-space: normal !important;
+    word-break: normal !important;
     border: 1px solid var(--border-color);
     writing-mode: horizontal-tb !important;
     text-orientation: mixed !important;
     vertical-align: middle;
 }
 
-/* Header tabel rata tengah */
+/* Header rata tengah */
 th {
     background-color: #f0f4f7;
     color: var(--text-color);
@@ -260,18 +269,18 @@ td:nth-child(9) {
     text-align: center;
 }
 
-/* Lebar kolom proporsional */
-th:nth-child(1), td:nth-child(1) { width: 5%; }
+/* Lebar kolom dibuat lebih besar */
+th:nth-child(1), td:nth-child(1) { width: 4%; }
 th:nth-child(2), td:nth-child(2) { width: 15%; }
 th:nth-child(3), td:nth-child(3) { width: 12%; }
-th:nth-child(4), td:nth-child(4) { width: 15%; }
+th:nth-child(4), td:nth-child(4) { width: 14%; }
 th:nth-child(5), td:nth-child(5) { width: 12%; }
-th:nth-child(6), td:nth-child(6) { width: 28%; }
-th:nth-child(7), td:nth-child(7) { width: 10%; }
+th:nth-child(6), td:nth-child(6) { width: 28%; } /* Kelengkapan */
+th:nth-child(7), td:nth-child(7) { width: 8%; }
 th:nth-child(8), td:nth-child(8) { width: 10%; }
-th:nth-child(9), td:nth-child(9) { width: 8%; }
+th:nth-child(9), td:nth-child(9) { width: 7%; }
 
-/* Alternating row dan hover */
+/* Alternating row & hover */
 tbody tr:nth-child(even) {
     background-color: #f9fbfc;
 }
@@ -433,6 +442,7 @@ tbody tr:hover {
         padding: 10px;
     }
 }
+
 
 
 

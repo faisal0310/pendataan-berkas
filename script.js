@@ -1,12 +1,44 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // Cek apakah pengguna sudah login
+    if (window.location.pathname.endsWith('index.html') && !localStorage.getItem('isLoggedIn')) {
+        window.location.href = 'login.html';
+        return;
+    }
+    
+    // Logika Login
+    const loginForm = document.getElementById('login-form');
+    if (loginForm) {
+        loginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            // Kredensial hardcoded
+            if (username === 'admin' && password === 'admin123') {
+                localStorage.setItem('isLoggedIn', 'true');
+                window.location.href = 'index.html';
+            } else {
+                alert('Username atau password salah.');
+            }
+        });
+        return;
+    }
+
+    // Logika Dashboard (hanya berjalan jika sudah login)
     const fileForm = document.getElementById('file-form');
     const fileTableBody = document.querySelector('#file-table tbody');
     const berkasChecklistDiv = document.getElementById('berkas-checklist');
     const kategoriSelect = document.getElementById('kategori');
     const exportExcelBtn = document.getElementById('export-excel-btn');
     const exportPdfBtn = document.getElementById('export-pdf-btn');
+    const logoutBtn = document.getElementById('logout-btn');
 
-    // Daftar berkas untuk setiap kategori
+    // Tombol Filter
+    const filterDailyBtn = document.getElementById('filter-daily-btn');
+    const filterWeeklyBtn = document.getElementById('filter-weekly-btn');
+    const filterMonthlyBtn = document.getElementById('filter-monthly-btn');
+    const filterAllBtn = document.getElementById('filter-all-btn');
+
     const berkasLists = {
         'Amanah': [
             "bukti tanda terima dokumen pencairan (akad)",
@@ -27,9 +59,10 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     let files = JSON.parse(localStorage.getItem('files')) || [];
-    renderFiles();
 
-    // Fungsi untuk membuat checkbox daftar berkas
+    // Tampilkan data harian saat halaman dimuat
+    renderFiles(filterFilesByDate('daily'));
+
     function renderRequiredFilesChecklist(requiredFiles) {
         berkasChecklistDiv.innerHTML = '';
         if (requiredFiles) {
@@ -53,7 +86,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
     
-    // Event listener untuk kategori dropdown
     kategoriSelect.addEventListener('change', (e) => {
         const selectedCategory = e.target.value;
         const requiredFiles = berkasLists[selectedCategory];
@@ -92,9 +124,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         files.push(newFile);
         saveFiles();
-        renderFiles();
+        renderFiles(filterFilesByDate('daily'));
         fileForm.reset();
-        renderRequiredFilesChecklist(null); // Kosongkan checklist setelah submit
+        renderRequiredFilesChecklist(null);
     });
 
     fileTableBody.addEventListener('click', (e) => {
@@ -102,29 +134,84 @@ document.addEventListener('DOMContentLoaded', () => {
             const index = e.target.getAttribute('data-index');
             files.splice(index, 1);
             saveFiles();
-            renderFiles();
+            renderFiles(files);
         }
     });
 
-    function renderFiles() {
-        fileTableBody.innerHTML = '';
-        files.forEach((file, index) => {
-            const formattedTime = file.waktu ? new Date(file.waktu).toLocaleString('id-ID', { dateStyle: 'short', timeStyle: 'short' }) : '-';
+    // Fungsi untuk memfilter data berdasarkan rentang waktu
+    function filterFilesByDate(period) {
+        const now = new Date();
+        let startDate;
 
+        switch (period) {
+            case 'daily':
+                startDate = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+                break;
+            case 'weekly':
+                const day = now.getDay();
+                const diff = now.getDate() - day + (day === 0 ? -6 : 1); // Senin sebagai hari pertama
+                startDate = new Date(now.setDate(diff));
+                startDate.setHours(0, 0, 0, 0);
+                break;
+            case 'monthly':
+                startDate = new Date(now.getFullYear(), now.getMonth(), 1);
+                break;
+            case 'all':
+            default:
+                return files;
+        }
+
+        return files.filter(file => new Date(file.waktu) >= startDate);
+    }
+
+    // Event listener untuk tombol filter
+    filterDailyBtn.addEventListener('click', () => {
+        setActiveFilterButton(filterDailyBtn);
+        renderFiles(filterFilesByDate('daily'));
+    });
+    filterWeeklyBtn.addEventListener('click', () => {
+        setActiveFilterButton(filterWeeklyBtn);
+        renderFiles(filterFilesByDate('weekly'));
+    });
+    filterMonthlyBtn.addEventListener('click', () => {
+        setActiveFilterButton(filterMonthlyBtn);
+        renderFiles(filterFilesByDate('monthly'));
+    });
+    filterAllBtn.addEventListener('click', () => {
+        setActiveFilterButton(filterAllBtn);
+        renderFiles(filterFilesByDate('all'));
+    });
+
+    function setActiveFilterButton(activeButton) {
+        document.querySelectorAll('.filter-buttons button').forEach(btn => btn.classList.remove('active'));
+        activeButton.classList.add('active');
+    }
+
+    function renderFiles(filteredFiles) {
+        fileTableBody.innerHTML = '';
+        if (filteredFiles && filteredFiles.length > 0) {
+            filteredFiles.forEach((file, index) => {
+                const formattedTime = file.waktu ? new Date(file.waktu).toLocaleString('id-ID', { dateStyle: 'short', timeStyle: 'short' }) : '-';
+
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${index + 1}</td>
+                    <td>${file.nama}</td>
+                    <td>${file.kategori || '-'}</td>
+                    <td>${file.cabang || '-'}</td>
+                    <td>${formattedTime}</td>
+                    <td>${file.kelengkapan || '-'}</td>
+                    <td>${file.tidakLengkap || '-'}</td>
+                    <td style="color: ${file.status === 'Lengkap' ? 'green' : 'red'}; font-weight: bold;">${file.status}</td>
+                    <td><button class="delete-btn" data-index="${index}">Hapus</button></td>
+                `;
+                fileTableBody.appendChild(row);
+            });
+        } else {
             const row = document.createElement('tr');
-            row.innerHTML = `
-                <td>${index + 1}</td>
-                <td>${file.nama}</td>
-                <td>${file.kategori || '-'}</td>
-                <td>${file.cabang || '-'}</td>
-                <td>${formattedTime}</td>
-                <td>${file.kelengkapan || '-'}</td>
-                <td>${file.tidakLengkap || '-'}</td>
-                <td style="color: ${file.status === 'Lengkap' ? 'green' : 'red'}; font-weight: bold;">${file.status}</td>
-                <td><button class="delete-btn" data-index="${index}">Hapus</button></td>
-            `;
+            row.innerHTML = `<td colspan="9" style="text-align:center;">Tidak ada data pada periode ini.</td>`;
             fileTableBody.appendChild(row);
-        });
+        }
     }
 
     function saveFiles() {
@@ -151,5 +238,11 @@ document.addEventListener('DOMContentLoaded', () => {
             doc.addImage(imgData, 'PNG', 20, 50, imgWidth, imgHeight);
             doc.save("Data_Berkas.pdf");
         });
+    });
+
+    logoutBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        localStorage.removeItem('isLoggedIn');
+        window.location.href = 'login.html';
     });
 });

@@ -242,4 +242,19 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         exportPdfBtn.addEventListener('click', () => {
-            const { jsPDF } = window.
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF('p', 'pt', 'a4');
+            const table = document.getElementById('file-table');
+            
+            html2canvas(table).then(canvas => {
+                const imgData = canvas.toDataURL('image/png');
+                const imgWidth = doc.internal.pageSize.getWidth() - 40;
+                const imgHeight = (canvas.height * imgWidth) / canvas.width;
+                
+                doc.text("Daftar Berkas", 40, 30);
+                doc.addImage(imgData, 'PNG', 20, 50, imgWidth, imgHeight);
+                doc.save("Data_Berkas.pdf");
+            });
+        });
+    }
+});

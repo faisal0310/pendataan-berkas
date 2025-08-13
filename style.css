@@ -226,30 +226,18 @@ table {
     overflow: hidden;
 }
 
-/* Pastikan semua teks tabel horizontal */
+/* Semua teks tabel tetap horizontal */
 th, td {
     padding: 12px 10px;
-    text-align: left;
-    vertical-align: top;
-    white-space: normal; /* biar teks bisa pindah baris normal */
-    word-break: break-word;
+    white-space: normal !important; /* biar kata utuh tidak pecah */
+    word-break: normal !important;  /* hindari pecah per huruf */
     border: 1px solid var(--border-color);
     writing-mode: horizontal-tb !important;
     text-orientation: mixed !important;
+    vertical-align: middle;
 }
 
-/* Lebar kolom yang lebih proporsional */
-th:nth-child(1), td:nth-child(1) { width: 5%;  text-align: center; }
-th:nth-child(2), td:nth-child(2) { width: 15%; }
-th:nth-child(3), td:nth-child(3) { width: 12%; }
-th:nth-child(4), td:nth-child(4) { width: 15%; }
-th:nth-child(5), td:nth-child(5) { width: 10%; }
-th:nth-child(6), td:nth-child(6) { width: 30%; }
-th:nth-child(7), td:nth-child(7) { width: 8%;  text-align: center; }
-th:nth-child(8), td:nth-child(8) { width: 10%; text-align: center; }
-th:nth-child(9), td:nth-child(9) { width: 8%;  text-align: center; }
-
-/* Header tabel */
+/* Header tabel rata tengah */
 th {
     background-color: #f0f4f7;
     color: var(--text-color);
@@ -258,7 +246,30 @@ th {
     font-size: 0.9rem;
     border-top: none;
     border-bottom: 2px solid var(--border-color);
+    text-align: center;
 }
+
+/* Isi tabel rata kiri, kecuali nomor dan tombol */
+td {
+    text-align: left;
+}
+td:nth-child(1),
+td:nth-child(7),
+td:nth-child(8),
+td:nth-child(9) {
+    text-align: center;
+}
+
+/* Lebar kolom proporsional */
+th:nth-child(1), td:nth-child(1) { width: 5%; }
+th:nth-child(2), td:nth-child(2) { width: 15%; }
+th:nth-child(3), td:nth-child(3) { width: 12%; }
+th:nth-child(4), td:nth-child(4) { width: 15%; }
+th:nth-child(5), td:nth-child(5) { width: 12%; }
+th:nth-child(6), td:nth-child(6) { width: 28%; }
+th:nth-child(7), td:nth-child(7) { width: 10%; }
+th:nth-child(8), td:nth-child(8) { width: 10%; }
+th:nth-child(9), td:nth-child(9) { width: 8%; }
 
 /* Alternating row dan hover */
 tbody tr:nth-child(even) {
@@ -268,7 +279,6 @@ tbody tr:hover {
     background-color: #eaf1f8;
     transition: background-color 0.3s ease;
 }
-
 
 .delete-btn {
     background-color: var(--danger-color);
@@ -423,5 +433,6 @@ tbody tr:hover {
         padding: 10px;
     }
 }
+
 
 

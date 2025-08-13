@@ -1,110 +1,118 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard Admin Berkas</title>
-    <link rel="stylesheet" href="style.css" />
-  </head>
-  <body>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
     <div class="dashboard-container">
-      <div class="sidebar">
-        <div class="logo">
-          <h3>Admin Panel</h3>
-        </div>
-        <ul class="nav-links">
-          <li class="active">
-            <a href="#">
-              <span>Dashboard</span>
-            </a>
-          </li>
-          <li>
-            <a href="#">
-              <span>Pengaturan</span>
-            </a>
-          </li>
-          <li>
-            <a href="#">
-              <span>Logout</span>
-            </a>
-          </li>
-        </ul>
-      </div>
-
-      <div class="main-content">
-        <header class="main-header">
-          <h2>Pendataan Berkas Notaris</h2>
-        </header>
-        <div class="content-wrapper">
-          <div class="card">
-            <h3>Tambah Data Berkas</h3>
-            <form id="file-form">
-              <div class="form-group">
-                <label for="nama">Nama:</label>
-                <input type="text" id="nama" required />
-              </div>
-
-              <div class="form-group">
-                <label for="cabang">Kantor Cabang:</label>
-                <select id="cabang" required>
-                  <option value="" disabled selected>
-                    Pilih Kantor Cabang
-                  </option>
-                  <option value="CPS KUALA SIMPANG">CPS KUALA SIMPANG</option>
-                  <option value="Ups Karang Baru">Ups Karang Baru</option>
-                  <option value="Ups Kejuruan Muda">Ups Kejuruan Muda</option>
-                  <option value="Ups Tualang Cut">Ups Tualang Cut</option>
-                </select>
-              </div>
-
-              <div class="form-group">
-                <label for="waktu">Waktu Masuk Berkas:</label>
-                <input type="datetime-local" id="waktu" required />
-              </div>
-
-              <div class="form-group">
-                <label>Daftar Berkas:</label>
-                <div id="berkas-checklist"></div>
-              </div>
-
-              <button type="submit">Tambah Data</button>
-            </form>
-          </div>
-
-          <div class="card">
-            <h3>Daftar Berkas</h3>
-            <div class="table-responsive">
-              <table id="file-table">
-                <thead>
-                  <tr>
-                    <th>No</th>
-                    <th>Nama</th>
-                    <th>Kantor Cabang</th>
-                    <th>Waktu Masuk</th>
-                    <th>Kelengkapan</th>
-                    <th>Tidak Lengkap</th>
-                    <th>Status</th>
-                    <th>Aksi</th>
-                  </tr>
-                </thead>
-                <tbody></tbody>
-              </table>
+        <div class="sidebar">
+            <div class="logo">
+                <h3>Admin Panel</h3>
             </div>
-
-            <div class="export-buttons">
-              <button id="export-excel-btn">Ekspor ke Excel</button>
-              <button id="export-pdf-btn">Ekspor ke PDF</button>
-            </div>
-          </div>
+            <ul class="nav-links">
+                <li class="active">
+                    <a href="#">
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <span>Pengaturan</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <span>Logout</span>
+                    </a>
+                </li>
+            </ul>
         </div>
-      </div>
+
+        <div class="main-content">
+            <header class="main-header">
+                <h2>Pendataan Berkas</h2>
+            </header>
+            <div class="content-wrapper">
+                <div class="card">
+                    <h3>Tambah Data Berkas</h3>
+                    <form id="file-form">
+                        <div class="form-group">
+                            <label for="nama">Nama:</label>
+                            <input type="text" id="nama" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="kategori">Kategori:</label>
+                            <select id="kategori" required>
+                                <option value="" disabled selected>Pilih Kategori</option>
+                                <option value="Amanah">Amanah</option>
+                                <option value="Arrum BPKB">Arrum BPKB</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="cabang">Kantor Cabang:</label>
+                            <select id="cabang" required>
+                                <option value="" disabled selected>Pilih Kantor Cabang</option>
+                                <option value="Kantor A">Kantor A</option>
+                                <option value="Kantor B">Kantor B</option>
+                                <option value="Kantor C">Kantor C</option>
+                                <option value="Kantor D">Kantor D</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="waktu">Waktu Masuk Berkas:</label>
+                            <input type="datetime-local" id="waktu" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Daftar Berkas:</label>
+                            <div id="berkas-checklist">
+                                </div>
+                        </div>
+                        
+                        <button type="submit">Tambah Data</button>
+                    </form>
+                </div>
+                
+                <div class="card">
+                    <h3>Daftar Berkas</h3>
+                    <div class="table-responsive">
+                        <table id="file-table">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Nama</th>
+                                    <th>Kategori</th>
+                                    <th>Kantor Cabang</th>
+                                    <th>Waktu Masuk</th>
+                                    <th>Kelengkapan</th>
+                                    <th>Tidak Lengkap</th>
+                                    <th>Status</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                </tbody>
+                        </table>
+                    </div>
+                    
+                    <div class="export-buttons">
+                        <button id="export-excel-btn">Ekspor ke Excel</button>
+                        <button id="export-pdf-btn">Ekspor ke PDF</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-
+    
     <script src="script.js"></script>
-  </body>
+</body>
 </html>
-

@@ -96,7 +96,7 @@ body {
 .main-content {
     flex-grow: 1;
     padding: 20px;
-    margin-left: 250px; /* Sesuaikan dengan lebar sidebar */
+    margin-left: 250px;
 }
 
 .main-header {
@@ -194,6 +194,9 @@ th, td {
     padding: 12px;
     border: 1px solid #dee2e6;
     text-align: left;
+    vertical-align: top;
+    white-space: normal;
+    word-break: break-word;
 }
 
 th {
@@ -222,7 +225,7 @@ th {
     gap: 10px;
     margin-bottom: 20px;
     justify-content: center;
-    flex-wrap: wrap; /* Tombol akan pindah baris jika layar sempit */
+    flex-wrap: wrap;
 }
 
 .filter-buttons button {
@@ -274,52 +277,72 @@ th {
 /* --- Media Queries (Responsif) --- */
 @media (min-width: 768px) {
     .content-wrapper {
-        grid-template-columns: 2fr 3fr; /* Layout 2 kolom untuk desktop */
+        grid-template-columns: 2fr 3fr;
     }
 }
 
 @media (max-width: 767px) {
     .dashboard-container {
-        flex-direction: column; /* Ubah layout menjadi vertikal di mobile */
+        flex-direction: column;
     }
-
+    
     .sidebar {
         width: 100%;
-        padding: 10px;
-        position: relative; /* Sidebar tidak lagi fixed */
         height: auto;
+        position: relative;
+        padding: 10px 0;
     }
     
     .sidebar .logo {
-        display: none; /* Sembunyikan logo di mobile */
+        display: none;
     }
-
+    
     .sidebar .nav-links {
         display: flex;
         justify-content: space-around;
+        align-items: center;
     }
-
+    
     .sidebar .nav-links a {
-        padding: 8px 12px;
+        padding: 10px 15px;
         text-align: center;
-        font-size: 0.9rem;
+        flex-grow: 1;
     }
-
+    
     .main-content {
         padding: 10px;
         margin-left: 0;
     }
     
     .main-header {
+        padding: 15px;
         text-align: center;
         margin-bottom: 10px;
     }
 
+    .card {
+        padding: 15px;
+    }
+    
     .card h3 {
         text-align: center;
+        font-size: 1.1rem;
     }
 
+    .filter-buttons, .export-buttons {
+        flex-direction: column;
+        gap: 8px;
+    }
+    
     button {
         font-size: 0.9rem;
+    }
+    
+    table {
+        min-width: 600px;
+    }
+    
+    th, td {
+        padding: 8px;
     }
 }

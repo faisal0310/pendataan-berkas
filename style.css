@@ -208,7 +208,7 @@ button:hover {
     margin-right: 12px;
 }
 
-/* --- Tabel (Fokus perbaikan di sini) --- */
+/* --- Tabel (Perbaikan utama di sini) --- */
 .table-responsive {
     overflow-x: auto;
     margin-bottom: 20px;
@@ -224,8 +224,6 @@ table {
     background-color: var(--card-bg);
     border-radius: 8px;
     overflow: hidden;
-    /* Menghapus table-layout: fixed; agar lebar kolom dinamis */
-    /* Menentukan lebar kolom yang berbeda */
 }
 
 th, td {
@@ -234,19 +232,19 @@ th, td {
     vertical-align: top;
     white-space: normal;
     word-break: break-word;
-    border-bottom: 1px solid var(--border-color);
+    border: 1px solid var(--border-color); /* Perbaikan border */
 }
 
 /* Menyesuaikan lebar kolom agar rapi */
-th:nth-child(1), td:nth-child(1) { width: 5%; } /* NO */
-th:nth-child(2), td:nth-child(2) { width: 15%; } /* NAMA */
-th:nth-child(3), td:nth-child(3) { width: 10%; } /* KATEGORI */
-th:nth-child(4), td:nth-child(4) { width: 12%; } /* KANTOR CABANG */
-th:nth-child(5), td:nth-child(5) { width: 10%; } /* WAKTU MASUK */
-th:nth-child(6), td:nth-child(6) { width: 35%; } /* KELENGKAPAN (Mengambil sisa ruang) */
-th:nth-child(7), td:nth-child(7) { width: 5%; } /* TIDAK LENGKAP */
-th:nth-child(8), td:nth-child(8) { width: 8%; } /* STATUS */
-th:nth-child(9), td:nth-child(9) { width: 5%; } /* AKSI */
+th:nth-child(1), td:nth-child(1) { width: 5%; }
+th:nth-child(2), td:nth-child(2) { width: 15%; }
+th:nth-child(3), td:nth-child(3) { width: 10%; }
+th:nth-child(4), td:nth-child(4) { width: 12%; }
+th:nth-child(5), td:nth-child(5) { width: 10%; }
+th:nth-child(6), td:nth-child(6) { width: 35%; }
+th:nth-child(7), td:nth-child(7) { width: 5%; }
+th:nth-child(8), td:nth-child(8) { width: 8%; }
+th:nth-child(9), td:nth-child(9) { width: 5%; }
 
 th {
     background-color: #f0f4f7;
@@ -255,8 +253,10 @@ th {
     text-transform: uppercase;
     font-size: 0.9rem;
     border-top: none;
+    border-bottom: 2px solid var(--border-color); /* Border bawah yang lebih menonjol */
 }
 
+/* Efek zebra-striping dan hover */
 tbody tr:nth-child(even) {
     background-color: #f9fbfc;
 }
@@ -382,7 +382,7 @@ tbody tr:hover {
     
     .sidebar .nav-links a.active {
         border-left: none;
-        border-bottom: 44px solid var(--primary-color);
+        border-bottom: 4px solid var(--primary-color);
     }
     
     .main-content {

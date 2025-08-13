@@ -233,9 +233,10 @@ th, td {
     white-space: normal;
     word-break: break-word;
     border: 1px solid var(--border-color);
-    /* Memastikan teks header horizontal */
-    writing-mode: horizontal-tb;
-    text-orientation: mixed;
+    writing-mode: horizontal-tb !important;
+    text-orientation: mixed !important;
+
+
 }
 
 /* Menyesuaikan lebar kolom agar rapi */
@@ -421,3 +422,4 @@ tbody tr:hover {
         padding: 10px;
     }
 }
+

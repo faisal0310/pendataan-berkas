@@ -232,7 +232,10 @@ th, td {
     vertical-align: top;
     white-space: normal;
     word-break: break-word;
-    border: 1px solid var(--border-color); /* Perbaikan border */
+    border: 1px solid var(--border-color);
+    /* Memastikan teks header horizontal */
+    writing-mode: horizontal-tb;
+    text-orientation: mixed;
 }
 
 /* Menyesuaikan lebar kolom agar rapi */
@@ -253,10 +256,9 @@ th {
     text-transform: uppercase;
     font-size: 0.9rem;
     border-top: none;
-    border-bottom: 2px solid var(--border-color); /* Border bawah yang lebih menonjol */
+    border-bottom: 2px solid var(--border-color);
 }
 
-/* Efek zebra-striping dan hover */
 tbody tr:nth-child(even) {
     background-color: #f9fbfc;
 }

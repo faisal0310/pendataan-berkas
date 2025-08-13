@@ -1,19 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
 :root {
     --primary-color: #007bff;
     --secondary-color: #6c757d;
     --success-color: #28a745;
     --danger-color: #dc3545;
-    --light-bg: #f8f9fa;
-    --dark-bg: #343a40;
-    --text-color: #212529;
-    --text-light: #f1f1f1;
-    --card-bg: #fff;
-    --shadow-sm: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
-    --shadow-md: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    --light-bg: #f4f7f9;
+    --dark-bg: #2c3e50;
+    --text-color: #34495e;
+    --text-light: #ecf0f1;
+    --card-bg: #ffffff;
+    --border-color: #e0e6ed;
+    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-family: 'Poppins', sans-serif;
     margin: 0;
     padding: 0;
     background-color: var(--light-bg);
@@ -33,13 +36,14 @@ body {
     max-width: 400px;
     padding: 40px;
     background-color: var(--card-bg);
-    border-radius: 8px;
+    border-radius: 12px;
     box-shadow: var(--shadow-md);
 }
 
 .login-card h2 {
     text-align: center;
     margin-bottom: 30px;
+    color: var(--dark-bg);
 }
 
 /* --- Dashboard Layout --- */
@@ -53,7 +57,7 @@ body {
     width: 250px;
     background-color: var(--dark-bg);
     color: var(--text-light);
-    padding: 20px;
+    padding: 20px 0;
     box-shadow: var(--shadow-md);
     position: fixed;
     height: 100%;
@@ -62,11 +66,13 @@ body {
 .sidebar .logo {
     text-align: center;
     margin-bottom: 30px;
+    padding: 0 20px;
 }
 
 .sidebar .logo h3 {
     margin: 0;
-    font-size: 1.5rem;
+    font-size: 1.6rem;
+    font-weight: 600;
 }
 
 .sidebar .nav-links {
@@ -80,16 +86,17 @@ body {
 
 .sidebar .nav-links a {
     display: block;
-    padding: 10px 15px;
+    padding: 12px 20px;
     text-decoration: none;
     color: var(--text-light);
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
+    border-radius: 0;
+    transition: background-color 0.3s ease, border-left 0.3s ease;
 }
 
 .sidebar .nav-links a:hover,
 .sidebar .nav-links .active a {
-    background-color: #495057;
+    background-color: #34495e;
+    border-left: 4px solid var(--primary-color);
 }
 
 /* --- Konten Utama --- */
@@ -105,11 +112,13 @@ body {
     margin-bottom: 20px;
     border-radius: 8px;
     box-shadow: var(--shadow-sm);
+    text-align: center;
 }
 
 .main-header h2 {
     margin: 0;
     font-size: 1.5rem;
+    color: var(--dark-bg);
 }
 
 .content-wrapper {
@@ -120,62 +129,68 @@ body {
 
 .card {
     background-color: var(--card-bg);
-    padding: 20px;
+    padding: 25px;
     border-radius: 8px;
     box-shadow: var(--shadow-sm);
 }
 
 .card h3 {
     margin-top: 0;
-    font-size: 1.25rem;
-    margin-bottom: 20px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 25px;
+    text-align: center;
 }
 
 /* --- Form --- */
 .form-group {
-    margin-bottom: 15px;
+    margin-bottom: 20px;
 }
 
 label {
     display: block;
-    margin-bottom: 5px;
-    font-weight: 600;
+    margin-bottom: 8px;
+    font-weight: 500;
 }
 
 input[type="text"],
 input[type="datetime-local"],
 select {
     width: 100%;
-    padding: 10px;
-    border: 1px solid #ced4da;
-    border-radius: 4px;
+    padding: 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
     box-sizing: border-box;
     font-size: 1rem;
+    background-color: #fcfcfc;
 }
 
 button {
     background-color: var(--primary-color);
     color: var(--text-light);
-    padding: 10px 15px;
+    padding: 12px 15px;
     border: none;
-    border-radius: 4px;
+    border-radius: 6px;
     cursor: pointer;
     font-size: 1rem;
+    font-weight: 500;
     width: 100%;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 button:hover {
     background-color: #0056b3;
+    transform: translateY(-2px);
 }
 
 .checkbox-item {
-    margin-bottom: 5px;
+    margin-bottom: 8px;
+    font-weight: 400;
 }
 
 .checkbox-item input[type="checkbox"] {
     width: auto;
-    margin-right: 10px;
+    margin-right: 12px;
 }
 
 /* --- Tabel --- */
@@ -187,12 +202,12 @@ button:hover {
 table {
     width: 100%;
     border-collapse: collapse;
-    min-width: 800px; /* Agar tabel tidak terlalu sempit di mobile */
+    min-width: 800px;
 }
 
 th, td {
-    padding: 12px;
-    border: 1px solid #dee2e6;
+    padding: 15px 10px;
+    border: 1px solid var(--border-color);
     text-align: left;
     vertical-align: top;
     white-space: normal;
@@ -201,16 +216,17 @@ th, td {
 
 th {
     background-color: var(--light-bg);
-    color: #495057;
+    color: var(--text-color);
     font-weight: 600;
     text-transform: uppercase;
+    font-size: 0.9rem;
 }
 
 .delete-btn {
     background-color: var(--danger-color);
     color: white;
     border: none;
-    padding: 5px 10px;
+    padding: 8px 12px;
     border-radius: 4px;
     cursor: pointer;
 }
@@ -231,17 +247,14 @@ th {
 .filter-buttons button {
     background-color: var(--secondary-color);
     width: auto;
-    padding: 8px 15px;
-    transition: background-color 0.2s ease;
-}
-
-.filter-buttons button:hover {
-    background-color: #5a6268;
+    padding: 10px 18px;
+    font-size: 0.9rem;
 }
 
 .filter-buttons button.active {
     background-color: var(--primary-color);
     color: white;
+    box-shadow: var(--shadow-sm);
 }
 
 /* --- Tombol Ekspor --- */
@@ -249,13 +262,15 @@ th {
     margin-top: 20px;
     display: flex;
     justify-content: center;
-    gap: 10px;
+    gap: 15px;
     flex-wrap: wrap;
 }
 
 #export-excel-btn, #export-pdf-btn {
     width: auto;
-    padding: 10px 20px;
+    padding: 12px 20px;
+    font-size: 0.95rem;
+    font-weight: 500;
 }
 
 #export-excel-btn {
@@ -307,42 +322,47 @@ th {
         padding: 10px 15px;
         text-align: center;
         flex-grow: 1;
+        border-left: none;
+        border-bottom: 4px solid transparent;
+        border-radius: 0;
+    }
+    
+    .sidebar .nav-links a.active {
+        border-left: none;
+        border-bottom: 4px solid var(--primary-color);
     }
     
     .main-content {
-        padding: 10px;
+        padding: 15px;
         margin-left: 0;
     }
     
     .main-header {
         padding: 15px;
-        text-align: center;
-        margin-bottom: 10px;
     }
 
     .card {
-        padding: 15px;
+        padding: 20px;
     }
     
     .card h3 {
-        text-align: center;
-        font-size: 1.1rem;
+        font-size: 1.2rem;
     }
 
     .filter-buttons, .export-buttons {
         flex-direction: column;
-        gap: 8px;
+        gap: 10px;
     }
     
     button {
-        font-size: 0.9rem;
+        font-size: 0.95rem;
     }
     
     table {
-        min-width: 600px;
+        min-width: 550px;
     }
     
     th, td {
-        padding: 8px;
+        padding: 10px;
     }
 }
